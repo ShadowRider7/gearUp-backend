@@ -4,6 +4,7 @@ import config from "./config";
 import cookieParser from "cookie-parser";
 import { notFound } from "./middlewares/notFound";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
+import { userRoutes } from "./modules/user/user.route";
 const app: Application = express();
 
 app.use(
@@ -18,6 +19,8 @@ app.use(cookieParser());
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello! , world!!");
 });
+
+app.use("/api/users", userRoutes);
 
 app.use(notFound);
 

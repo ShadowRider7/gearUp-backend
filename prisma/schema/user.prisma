@@ -1,20 +1,17 @@
-
 model User {
   id       String @id @default(uuid())
   name     String @db.VarChar(255)
   email    String @unique @db.VarChar(255)
   password String
 
-  phone        String?
-  address      String?
-  profileImage String?
-
-  role   UserRole  @default(CUSTOMER)
+  role   UserRole
   status UserStatus @default(ACTIVE)
 
-  gearItems    GearItem[] 
-  rentals      RentalOrder[]
-  reviews      Review[]
+  profile Profile?
+
+  gearItems GearItem[]
+  rentals  RentalOrder[]
+  reviews  Review[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
