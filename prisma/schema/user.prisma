@@ -9,10 +9,10 @@ model User {
   address      String?
   profileImage String?
 
-  role   UserRole
+  role   UserRole  @default(CUSTOMER)
   status UserStatus @default(ACTIVE)
 
-  gearItems    GearItem[]
+  gearItems    GearItem[] 
   rentals      RentalOrder[]
   reviews      Review[]
 

@@ -1,65 +1,17 @@
-/*
-  Warnings:
+-- CreateEnum
+CREATE TYPE "UserRole" AS ENUM ('ADMIN', 'PROVIDER', 'CUSTOMER');
 
-  - You are about to drop the `Category` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `GearItem` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Payment` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `RentalItem` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `RentalOrder` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Review` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
+-- CreateEnum
+CREATE TYPE "UserStatus" AS ENUM ('ACTIVE', 'SUSPENDED');
 
-*/
--- DropForeignKey
-ALTER TABLE "GearItem" DROP CONSTRAINT "GearItem_categoryId_fkey";
+-- CreateEnum
+CREATE TYPE "RentalStatus" AS ENUM ('PLACED', 'CONFIRMED', 'PAID', 'PICKED_UP', 'RETURNED', 'CANCELLED');
 
--- DropForeignKey
-ALTER TABLE "GearItem" DROP CONSTRAINT "GearItem_providerId_fkey";
+-- CreateEnum
+CREATE TYPE "PaymentMethod" AS ENUM ('STRIPE', 'SSLCOMMERZ');
 
--- DropForeignKey
-ALTER TABLE "Payment" DROP CONSTRAINT "Payment_rentalOrderId_fkey";
-
--- DropForeignKey
-ALTER TABLE "RentalItem" DROP CONSTRAINT "RentalItem_gearItemId_fkey";
-
--- DropForeignKey
-ALTER TABLE "RentalItem" DROP CONSTRAINT "RentalItem_rentalOrderId_fkey";
-
--- DropForeignKey
-ALTER TABLE "RentalOrder" DROP CONSTRAINT "RentalOrder_customerId_fkey";
-
--- DropForeignKey
-ALTER TABLE "RentalOrder" DROP CONSTRAINT "RentalOrder_providerId_fkey";
-
--- DropForeignKey
-ALTER TABLE "Review" DROP CONSTRAINT "Review_customerId_fkey";
-
--- DropForeignKey
-ALTER TABLE "Review" DROP CONSTRAINT "Review_gearItemId_fkey";
-
--- DropForeignKey
-ALTER TABLE "Review" DROP CONSTRAINT "Review_rentalOrderId_fkey";
-
--- DropTable
-DROP TABLE "Category";
-
--- DropTable
-DROP TABLE "GearItem";
-
--- DropTable
-DROP TABLE "Payment";
-
--- DropTable
-DROP TABLE "RentalItem";
-
--- DropTable
-DROP TABLE "RentalOrder";
-
--- DropTable
-DROP TABLE "Review";
-
--- DropTable
-DROP TABLE "User";
+-- CreateEnum
+CREATE TYPE "PaymentStatus" AS ENUM ('PENDING', 'COMPLETED', 'FAILED', 'REFUNDED');
 
 -- CreateTable
 CREATE TABLE "categories" (
@@ -145,7 +97,7 @@ CREATE TABLE "users" (
     "phone" TEXT,
     "address" TEXT,
     "profileImage" TEXT,
-    "role" "UserRole" NOT NULL,
+    "role" "UserRole" NOT NULL DEFAULT 'CUSTOMER',
     "status" "UserStatus" NOT NULL DEFAULT 'ACTIVE',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
