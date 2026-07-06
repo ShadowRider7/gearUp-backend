@@ -23,6 +23,41 @@ const addGearItem = catchAsync(
   },
 );
 
+const updateGearItem = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const gearItemId = req.params.id;
+    const payload = req.body;
+
+    const updatedGearItem = await providerService.updateGearItem(
+      gearItemId as string,
+      payload,
+    );
+    sendResponse(res, {
+      success: true,
+      statusCode: HttpStatus.OK,
+      message: "Gear item listed successfully!",
+      data: {
+        updatedGearItem,
+      },
+    });
+  },
+);
+
+const deleteGearItem = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = req.params.id;
+    await providerService.deleteGearItem(id as string);
+    sendResponse(res, {
+      success: true,
+      statusCode: HttpStatus.OK,
+      message: "Gear item deleted successfully!",
+      data: {},
+    });
+  },
+);
+
 export const providerController = {
   addGearItem,
+  updateGearItem,
+  deleteGearItem,
 };

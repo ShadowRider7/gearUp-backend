@@ -17,7 +17,23 @@ const getAllGearItems = catchAsync(
     });
   },
 );
-
+const gearItemDetails = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const gearItemId = req.params.id;
+    const gearItemDetails = await gearItemService.gearItemDetails(
+      gearItemId as string,
+    );
+    sendResponse(res, {
+      success: true,
+      statusCode: HttpStatus.OK,
+      message: "Gear item details fetched successfully by id!",
+      data: {
+        gearItemDetails,
+      },
+    });
+  },
+);
 export const gearItemController = {
   getAllGearItems,
+  gearItemDetails,
 };

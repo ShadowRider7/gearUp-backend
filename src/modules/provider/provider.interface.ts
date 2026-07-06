@@ -10,3 +10,13 @@ export interface IGearItemPayload {
   images: string[];
   specifications?: JsonArray;
 }
+
+export interface IUpdateGearItem {
+  name?: string;
+  description?: string;
+  brand?: string;
+  pricePerDay?: number;
+  stock?: number;
+  images?: string[];
+  specifications?: JsonArray;
+}

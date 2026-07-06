@@ -7,4 +7,15 @@ const router = Router();
 
 router.post("/gear", auth(UserRole.PROVIDER), providerController.addGearItem);
 
+router.put(
+  "/gear/:id",
+  auth(UserRole.PROVIDER),
+  providerController.updateGearItem,
+);
+
+router.delete(
+  "/gear/:id",
+  auth(UserRole.PROVIDER),
+  providerController.deleteGearItem,
+);
 export const ProviderRoutes = router;

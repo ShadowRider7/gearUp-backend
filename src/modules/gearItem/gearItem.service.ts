@@ -1,3 +1,4 @@
+import { tr } from "zod/locales";
 import { prisma } from "../../lib/prisma";
 
 const getAllGearItems = async () => {
@@ -8,7 +9,25 @@ const getAllGearItems = async () => {
   });
   return allGearItems;
 };
-
+const gearItemDetails = async (gearItemId: string) => {
+  const result = await prisma.gearItem.findUniqueOrThrow({
+    where: {
+      id: gearItemId,
+    },
+    include: {
+      category: true,
+      provider: {
+        omit: {
+          password: true,
+        },
+      },
+      rentals: true,
+      reviews: true,
+    },
+  });
+  return result;
+};
 export const gearItemService = {
   getAllGearItems,
+  gearItemDetails,
 };
