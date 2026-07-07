@@ -35,7 +35,7 @@ const updateGearItem = catchAsync(
     sendResponse(res, {
       success: true,
       statusCode: HttpStatus.OK,
-      message: "Gear item listed successfully!",
+      message: "Gear item updated successfully!",
       data: {
         updatedGearItem,
       },
@@ -56,8 +56,44 @@ const deleteGearItem = catchAsync(
   },
 );
 
+const incomingOrder = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = req.user?.id;
+    const orders = await providerService.incomingOrder(id as string);
+    sendResponse(res, {
+      success: true,
+      statusCode: HttpStatus.OK,
+      message: "provider's all order fetched successfully",
+      data: {
+        orders,
+      },
+    });
+  },
+);
+
+const updateOrderStatus = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const orderId = req.params.id;
+    const { status } = req.body;
+
+    const statusUpdate = await providerService.updateOrderStatus(
+      orderId as string,
+      status,
+    );
+    sendResponse(res, {
+      success: true,
+      statusCode: HttpStatus.OK,
+      message: "order status has been changed",
+      data: {
+        statusUpdate,
+      },
+    });
+  },
+);
 export const providerController = {
   addGearItem,
   updateGearItem,
   deleteGearItem,
+  incomingOrder,
+  updateOrderStatus,
 };
