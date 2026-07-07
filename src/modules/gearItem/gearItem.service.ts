@@ -1,10 +1,14 @@
-import { tr } from "zod/locales";
 import { prisma } from "../../lib/prisma";
 
 const getAllGearItems = async () => {
   const allGearItems = await prisma.gearItem.findMany({
     include: {
       category: true,
+      provider: {
+        omit: {
+          password: true,
+        },
+      },
     },
   });
   return allGearItems;

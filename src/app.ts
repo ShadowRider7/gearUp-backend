@@ -10,6 +10,7 @@ import { categoryRoutes } from "./modules/category/category.route";
 import { ProviderRoutes } from "./modules/provider/provider.route";
 import { gearItemRoutes } from "./modules/gearItem/gearItem.route";
 import { rentalOrderRoutes } from "./modules/rentalOrder/rentalOrder.route";
+import { adminRoutes } from "./modules/admin/admin.route";
 const app: Application = express();
 
 app.use(
@@ -31,6 +32,7 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/provider", ProviderRoutes);
 app.use("/api/gear", gearItemRoutes);
 app.use("/api/rentals", rentalOrderRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.use(notFound);
 
