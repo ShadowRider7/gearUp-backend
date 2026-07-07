@@ -11,4 +11,16 @@ router.post(
   rentalOrderController.createRentalOrder,
 );
 
+router.get(
+  "/",
+  auth(UserRole.CUSTOMER),
+  rentalOrderController.usersRentalOrders,
+);
+
+router.get(
+  "/:id",
+  auth(UserRole.CUSTOMER, UserRole.ADMIN),
+  rentalOrderController.rentalOrderDetails,
+);
+
 export const rentalOrderRoutes = router;
