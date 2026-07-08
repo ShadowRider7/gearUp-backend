@@ -4,51 +4,59 @@ import { stripe } from "../../lib/stripe";
 import { handleCheckoutCompleted } from "./payment.utils";
 
 const createPaymentIntent = async (userId: string, rentalOrderId: string) => {
-  const order = await prisma.rentalOrder.findUniqueOrThrow({
-    where: {
-      id: rentalOrderId,
-      customerId: userId,
-    },
-    include: {
-      payment: true,
-      customer: true,
-    },
-  });
-
-  if (order.status !== "CONFIRMED") {
-    throw new Error("provider hasn't confirmed yet");
-  }
-
-  let stripeCustomerId = order.payment?.stripeCustomerId;
-  if (!stripeCustomerId) {
-    const customer = await stripe.customers.create({
-      email: order.customer.email,
-      name: order.customer.name,
-      metadata: { userId: order.customerId },
-    });
-    stripeCustomerId = customer.id;
-  }
-
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        price_data: {
-          currency: "bdt",
-          product_data: { name: `Rental Order ${order.id}` },
-          unit_amount: Math.round(order.totalAmount * 100),
-        },
-        quantity: 1,
+  const transactionResult = await prisma.$transaction(async (tx) => {
+    const order = await tx.rentalOrder.findUnique({
+      where: {
+        id: rentalOrderId,
+        customerId: userId,
       },
-    ],
-    mode: "payment",
-    customer: stripeCustomerId,
-    payment_method_types: ["card"],
-    success_url: `${config.app_url}/api/rentals?success=true`,
-    cancel_url: `${config.app_url}/api/payment?success=false`,
-    metadata: { customerId: order.customerId, orderId: order.id },
-  });
+      include: {
+        payment: true,
+        customer: true,
+      },
+    });
+    if (!order) {
+      throw new Error("this is not your order");
+    }
+    if (order.status !== "CONFIRMED") {
+      throw new Error("provider hasn't confirmed yet");
+    }
 
-  return { paymentUrl: session.url };
+    let stripeCustomerId = order.payment?.stripeCustomerId;
+    if (!stripeCustomerId) {
+      const customer = await stripe.customers.create({
+        email: order.customer.email,
+        name: order.customer.name,
+        metadata: { userId: order.customerId },
+      });
+
+      stripeCustomerId = customer.id;
+    }
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          price_data: {
+            currency: "bdt",
+            product_data: {
+              name: `Rental Order ${order.id}`,
+            },
+            unit_amount: Math.round(order.totalAmount * 100),
+          },
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      customer: stripeCustomerId,
+      payment_method_types: ["card"],
+      success_url: `${config.app_url}/api/rentals?success=true`,
+      cancel_url: `${config.app_url}/api/payment?success=false`,
+      metadata: { customerId: order.customerId, orderId: order.id },
+    });
+    return session.url;
+  });
+  return {
+    paymentUrl: transactionResult,
+  };
 };
 
 const handleWebhook = async (payload: Buffer, signature: string) => {
@@ -61,11 +69,7 @@ const handleWebhook = async (payload: Buffer, signature: string) => {
 
   switch (event.type) {
     case "checkout.session.completed":
-      try {
-        await handleCheckoutCompleted(event.data.object);
-      } catch (err) {
-        console.error("Webhook processing failed:", err);
-      }
+      await handleCheckoutCompleted(event.data.object);
       break;
     default:
       console.log(`Unhandled event type ${event.type}`);

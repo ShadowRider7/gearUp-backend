@@ -1,10 +1,16 @@
-import { UserStatus } from "../../../generated/prisma/enums";
+import { UserRole, UserStatus } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 
 const getAllUsersFromDB = async () => {
   const allUsers = await prisma.user.findMany({
+    where: {
+      role: UserRole.CUSTOMER || UserRole.PROVIDER,
+    },
     include: {
       profile: true,
+      rentals: true,
+      reviews: true,
+      gearItems: true,
     },
     omit: {
       password: true,

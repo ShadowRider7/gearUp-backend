@@ -6,31 +6,38 @@ import { RentalStatus } from "../../../generated/prisma/enums";
 export const handleCheckoutCompleted = async (
   session: Stripe.Checkout.Session,
 ) => {
-  const orderId = session.metadata?.orderId;
-  const stripeCustomerId = session.customer as string;
-  const stripePaymentIntentId = session.payment_intent as string;
+  try {
+    const orderId = session.metadata?.orderId;
+    const stripeCustomerId = session.customer as string;
+    const stripePaymentIntentId = session.payment_intent as string;
 
-  if (!orderId || !stripeCustomerId || !stripePaymentIntentId) {
-    throw new Error("webhook failed");
-  }
-  const stripePayment = await stripe.paymentIntents.retrieve(
-    stripePaymentIntentId,
-  );
+    if (!orderId || !stripeCustomerId || !stripePaymentIntentId) {
+      throw new Error("Missing required checkout session fields");
+    }
 
-  await prisma.payment.create({
-    data: {
-      rentalOrderId: orderId,
-      stripeCustomerId,
+    const stripePayment = await stripe.paymentIntents.retrieve(
       stripePaymentIntentId,
-      amount: stripePayment.amount / 100,
-    },
-  });
-  await prisma.rentalOrder.update({
-    where: {
-      id: orderId,
-    },
-    data: {
-      status: RentalStatus.PAID,
-    },
-  });
+    );
+
+    await prisma.payment.create({
+      data: {
+        rentalOrderId: orderId,
+        stripeCustomerId,
+        stripePaymentIntentId,
+        amount: stripePayment.amount / 100,
+      },
+    });
+
+    await prisma.rentalOrder.update({
+      where: {
+        id: orderId,
+      },
+      data: {
+        status: RentalStatus.PAID,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 };
