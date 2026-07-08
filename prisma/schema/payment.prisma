@@ -1,23 +1,17 @@
-
 model Payment {
-  id String @id @default(uuid())
+  id                     String        @id @default(uuid())
+  rentalOrderId          String        @unique
+  stripePaymentIntentId  String        @unique
+  stripeCustomerId       String?
+  amount                 Float
+  method                 PaymentMethod @default(STRIPE)
+  status                 PaymentStatus @default(COMPLETED)
+  paidAt                 DateTime      @default(now())
 
-  rentalOrderId String @unique
+  rentalOrder            RentalOrder   @relation(fields: [rentalOrderId], references: [id])
 
-  transactionId String @unique
-
-  amount Float
-
-  method PaymentMethod
-
-  status PaymentStatus @default(PENDING)
-
-  paidAt DateTime?
-
-  rentalOrder RentalOrder @relation(fields: [rentalOrderId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
 
   @@map("payments")
 }

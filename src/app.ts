@@ -12,6 +12,7 @@ import { gearItemRoutes } from "./modules/gearItem/gearItem.route";
 import { rentalOrderRoutes } from "./modules/rentalOrder/rentalOrder.route";
 import { adminRoutes } from "./modules/admin/admin.route";
 import { reviewRoutes } from "./modules/review/review.route";
+import { paymentRoutes } from "./modules/payment/payment.route";
 const app: Application = express();
 
 app.use(
@@ -20,6 +21,8 @@ app.use(
     credentials: true,
   }),
 );
+
+app.use("/api/subscription/webhook", express.raw({ type: "application/json" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -34,6 +37,7 @@ app.use("/api/provider", ProviderRoutes);
 app.use("/api/gear", gearItemRoutes);
 app.use("/api/rentals", rentalOrderRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/payments", paymentRoutes);
 app.use("/api/reviews", reviewRoutes);
 
 app.use(notFound);
