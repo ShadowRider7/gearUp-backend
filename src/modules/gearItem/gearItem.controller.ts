@@ -6,7 +6,8 @@ import HttpStatus from "http-status";
 
 const getAllGearItems = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const gearItemsList = await gearItemService.getAllGearItems();
+    const query = req.query;
+    const gearItemsList = await gearItemService.getAllGearItems(query);
     sendResponse(res, {
       success: true,
       statusCode: HttpStatus.OK,
