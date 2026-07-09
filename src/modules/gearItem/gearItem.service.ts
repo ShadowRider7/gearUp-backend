@@ -21,10 +21,22 @@ const getAllGearItems = async (query: IGearItemQuery) => {
     });
   }
 
-  if (query.name) andConditions.push({ name: query.name });
-  if (query.brand) andConditions.push({ brand: query.brand });
-  if (query.categoryId) andConditions.push({ categoryId: query.categoryId });
-  if (query.providerId) andConditions.push({ providerId: query.providerId });
+  if (query.name) {
+    andConditions.push({ name: query.name });
+  }
+  if (query.brand) {
+    andConditions.push({ brand: query.brand });
+  }
+  if (query.categoryId) {
+    andConditions.push({ categoryId: query.categoryId });
+  }
+  if (query.pricePerDay) {
+    andConditions.push({ pricePerDay: { lte: Number(query.pricePerDay) } });
+  }
+
+  if (query.providerId) {
+    andConditions.push({ providerId: query.providerId });
+  }
   if (query.stock) {
     andConditions.push({ stock: { gte: Number(query.stock) } });
   }

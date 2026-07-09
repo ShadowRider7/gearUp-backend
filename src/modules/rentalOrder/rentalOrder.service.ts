@@ -1,3 +1,4 @@
+import { RentalStatus } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import { IRentalOrder } from "./rentalOrder.interface";
 
@@ -133,8 +134,56 @@ const rentalOrderDetails = async (rentalOrderId: string) => {
   });
   return rentalOrderDetails;
 };
+
+const returnProduct = async (orderId: string) => {
+  return await prisma.$transaction(async (tx) => {
+    const order = await tx.rentalOrder.findUniqueOrThrow({
+      where: {
+        id: orderId,
+      },
+    });
+
+    if (order.status !== RentalStatus.PICKED_UP) {
+      throw new Error("Only picked up orders can be returned.");
+    }
+
+    await tx.gearItem.update({
+      where: {
+        id: order.gearItemId,
+      },
+      data: {
+        stock: {
+          increment: order.quantity,
+        },
+        isAvailable: true,
+      },
+    });
+
+    const updatedOrder = await tx.rentalOrder.update({
+      where: {
+        id: orderId,
+      },
+      data: {
+        status: RentalStatus.RETURNED,
+      },
+      include: {
+        customer: {
+          omit: {
+            password: true,
+          },
+        },
+        gearItem: true,
+        payment: true,
+        review: true,
+      },
+    });
+
+    return updatedOrder;
+  });
+};
 export const rentalOrderService = {
   createRentalOrder,
   usersRentalOrders,
   rentalOrderDetails,
+  returnProduct,
 };

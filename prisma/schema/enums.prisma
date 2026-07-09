@@ -13,11 +13,14 @@ enum UserStatus {
 enum RentalStatus {
   PLACED
   CONFIRMED
+  PAYMENT_INITIATED
   PAID
   PICKED_UP
   RETURNED
   CANCELLED
 }
+
+
 
 enum PaymentMethod {
   STRIPE

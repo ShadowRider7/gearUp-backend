@@ -19,4 +19,5 @@ export interface IUpdateGearItem {
   stock?: number;
   images?: string[];
   specifications?: JsonArray;
+  isAvailable?: boolean;
 }

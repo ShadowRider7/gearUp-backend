@@ -19,25 +19,39 @@ export const handleCheckoutCompleted = async (
       stripePaymentIntentId,
     );
 
-    await prisma.payment.create({
-      data: {
-        rentalOrderId: orderId,
-        stripeCustomerId,
-        stripePaymentIntentId,
-        amount: stripePayment.amount / 100,
-      },
-    });
+    await prisma.$transaction(async (tx) => {
+      await tx.payment.create({
+        data: {
+          rentalOrderId: orderId,
+          stripeCustomerId,
+          stripePaymentIntentId,
+          amount: stripePayment.amount / 100,
+        },
+      });
 
-    await prisma.rentalOrder.update({
-      where: {
-        id: orderId,
-      },
-      data: {
-        status: RentalStatus.PAID,
-      },
+      await tx.rentalOrder.update({
+        where: { id: orderId },
+        data: { status: RentalStatus.PAID },
+      });
     });
   } catch (err) {
-    console.error(err);
+    console.error("Webhook payment handler failed:", err);
     throw err;
+  }
+};
+
+export const handleCheckoutFailedOrExpired = async (
+  session: Stripe.Checkout.Session,
+) => {
+  try {
+    const orderId = session.metadata?.orderId;
+    if (!orderId) return;
+
+    await prisma.rentalOrder.update({
+      where: { id: orderId },
+      data: { status: RentalStatus.CONFIRMED },
+    });
+  } catch (err) {
+    console.error("Failed to reset order status from webhook:", err);
   }
 };

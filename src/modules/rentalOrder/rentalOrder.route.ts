@@ -23,4 +23,10 @@ router.get(
   rentalOrderController.rentalOrderDetails,
 );
 
+router.patch(
+  "/return/:id",
+  auth(UserRole.CUSTOMER),
+  rentalOrderController.returnProduct,
+);
+
 export const rentalOrderRoutes = router;

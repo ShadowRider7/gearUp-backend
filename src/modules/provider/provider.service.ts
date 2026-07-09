@@ -43,7 +43,9 @@ const updateGearItem = async (gearItemId: string, payload: IUpdateGearItem) => {
     images,
     specifications,
   } = payload;
-
+  if (stock !== undefined && stock > 0) {
+    payload.isAvailable = true;
+  }
   const updatedGearItem = await prisma.gearItem.update({
     where: {
       id: gearItemId,
@@ -109,47 +111,67 @@ const incomingOrder = async (providerId: string) => {
 };
 
 const updateOrderStatus = async (orderId: string, status: RentalStatus) => {
-  const order = await prisma.rentalOrder.findUniqueOrThrow({
-    where: {
-      id: orderId,
-    },
-  });
+  return await prisma.$transaction(async (tx) => {
+    const order = await tx.rentalOrder.findUniqueOrThrow({
+      where: { id: orderId },
+      include: { gearItem: true },
+    });
 
-  const allowedTransitions: Record<RentalStatus, RentalStatus[]> = {
-    PLACED: ["CONFIRMED", "CANCELLED"],
-    CONFIRMED: ["PAID", "CANCELLED"],
-    PAID: ["PICKED_UP"],
-    PICKED_UP: ["RETURNED"],
-    RETURNED: [],
-    CANCELLED: [],
-  };
+    const allowedTransitions: Record<RentalStatus, RentalStatus[]> = {
+      PLACED: ["CONFIRMED", "CANCELLED"],
+      CONFIRMED: ["PAYMENT_INITIATED", "CANCELLED"],
+      PAYMENT_INITIATED: ["PAID", "CONFIRMED", "CANCELLED"],
+      PAID: ["PICKED_UP"],
+      PICKED_UP: ["RETURNED"],
+      RETURNED: [],
+      CANCELLED: [],
+    };
 
-  if (!allowedTransitions[order.status].includes(status)) {
-    throw new Error(
-      `Cannot change order status from ${order.status} to ${status}.`,
-    );
-  }
-  const updatedOrder = await prisma.rentalOrder.update({
-    where: {
-      id: orderId,
-    },
-    data: {
-      status,
-    },
-    include: {
-      customer: {
-        omit: {
-          password: true,
+    if (!allowedTransitions[order.status].includes(status)) {
+      throw new Error(
+        `Cannot change order status from ${order.status} to ${status}.`,
+      );
+    }
+
+    if (status === "PICKED_UP") {
+      if (order.gearItem.stock < order.quantity) {
+        throw new Error("Insufficient stock.");
+      }
+
+      const gearUpdate = await tx.gearItem.update({
+        where: { id: order.gearItemId },
+        data: {
+          stock: {
+            decrement: order.quantity,
+          },
         },
-      },
-      gearItem: true,
-      payment: true,
-      review: true,
-    },
-  });
+      });
 
-  return updatedOrder;
+      if (gearUpdate.stock === 0) {
+        await tx.gearItem.update({
+          where: { id: order.gearItemId },
+          data: {
+            isAvailable: false,
+          },
+        });
+      }
+    }
+
+    const updatedOrder = await tx.rentalOrder.update({
+      where: { id: orderId },
+      data: { status },
+      include: {
+        customer: { omit: { password: true } },
+        gearItem: true,
+        payment: true,
+        review: true,
+      },
+    });
+
+    return updatedOrder;
+  });
 };
+
 export const providerService = {
   addGearItem,
   updateGearItem,

@@ -60,8 +60,26 @@ const rentalOrderDetails = catchAsync(
     });
   },
 );
+
+const returnProduct = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const orderId = req.params.id;
+
+    const result = await rentalOrderService.returnProduct(orderId as string);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: HttpStatus.OK,
+      message: "Product returned successfully",
+      data: {
+        result,
+      },
+    });
+  },
+);
 export const rentalOrderController = {
   createRentalOrder,
   usersRentalOrders,
   rentalOrderDetails,
+  returnProduct,
 };

@@ -1,0 +1,2 @@
+-- AlterEnum
+ALTER TYPE "RentalStatus" ADD VALUE 'PAYMENT_INITIATED';
