@@ -42,7 +42,24 @@ const handleWebhook = catchAsync(
     });
   },
 );
+
+const paymentHistory = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = req.user?.id;
+
+    const customerPaymentHistory = await paymentService.paymentHistory(
+      id as string,
+    );
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "payment history fetched successfully.",
+      data: customerPaymentHistory,
+    });
+  },
+);
 export const paymentController = {
   createPaymentIntent,
   handleWebhook,
+  paymentHistory,
 };

@@ -1,7 +1,5 @@
-import { includes } from "zod";
 import { prisma } from "../../lib/prisma";
-import { ICategoryPayload } from "./category.interface";
-import { tr } from "zod/locales";
+import { ICategoryPayload, ICategoryUpdate } from "./category.interface";
 
 const createCategoryInToDB = async (payload: ICategoryPayload) => {
   const { name, description } = payload;
@@ -23,8 +21,21 @@ const getAllCategory = async () => {
   });
   return result;
 };
-
+const updateCategory = async (categoryId: string, payload: ICategoryUpdate) => {
+  const { name, description } = payload || {};
+  const category = await prisma.category.update({
+    where: {
+      id: categoryId,
+    },
+    data: {
+      name,
+      description,
+    },
+  });
+  return category;
+};
 export const categoryService = {
   createCategoryInToDB,
   getAllCategory,
+  updateCategory,
 };

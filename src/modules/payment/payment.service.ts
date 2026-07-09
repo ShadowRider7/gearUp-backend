@@ -94,7 +94,6 @@ const handleWebhook = async (payload: Buffer, signature: string) => {
     case "checkout.session.completed":
       await handleCheckoutCompleted(event.data.object);
       break;
-
     case "checkout.session.expired":
     case "checkout.session.async_payment_failed":
       await handleCheckoutFailedOrExpired(event.data.object);
@@ -106,7 +105,25 @@ const handleWebhook = async (payload: Buffer, signature: string) => {
   }
 };
 
+const paymentHistory = async (userId: string) => {
+  const paymentHistory = await prisma.payment.findMany({
+    where: {
+      rentalOrder: {
+        customerId: userId,
+      },
+    },
+    include: {
+      rentalOrder: {
+        include: {
+          gearItem: true,
+        },
+      },
+    },
+  });
+  return paymentHistory;
+};
 export const paymentService = {
   createPaymentIntent,
   handleWebhook,
+  paymentHistory,
 };

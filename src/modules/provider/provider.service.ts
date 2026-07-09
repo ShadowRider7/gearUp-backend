@@ -43,9 +43,13 @@ const updateGearItem = async (gearItemId: string, payload: IUpdateGearItem) => {
     images,
     specifications,
   } = payload;
-  if (stock !== undefined && stock > 0) {
-    payload.isAvailable = true;
+
+  let isAvailable = payload.isAvailable;
+
+  if (stock !== undefined) {
+    isAvailable = stock > 0;
   }
+
   const updatedGearItem = await prisma.gearItem.update({
     where: {
       id: gearItemId,
@@ -58,6 +62,7 @@ const updateGearItem = async (gearItemId: string, payload: IUpdateGearItem) => {
       stock,
       images,
       specifications,
+      isAvailable,
     },
   });
 
@@ -79,6 +84,39 @@ const deleteGearItem = async (gearItemId: string) => {
 };
 
 const incomingOrder = async (providerId: string) => {
+  const orders = await prisma.rentalOrder.findMany({
+    where: {
+      gearItem: {
+        providerId,
+      },
+      status: RentalStatus.PLACED,
+    },
+    include: {
+      customer: {
+        omit: {
+          password: true,
+        },
+        include: {
+          profile: true,
+        },
+      },
+      gearItem: {
+        include: {
+          category: true,
+        },
+      },
+      payment: true,
+      review: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return orders;
+};
+
+const providersAllOrder = async (providerId: string) => {
   const orders = await prisma.rentalOrder.findMany({
     where: {
       gearItem: {
@@ -108,6 +146,18 @@ const incomingOrder = async (providerId: string) => {
   });
 
   return orders;
+};
+const reStockNeededGearItems = async (providerId: string) => {
+  const reStockNeededGearItems = await prisma.gearItem.findMany({
+    where: {
+      providerId,
+      stock: {
+        lte: 1, //provider can set
+      },
+    },
+  });
+
+  return reStockNeededGearItems;
 };
 
 const updateOrderStatus = async (orderId: string, status: RentalStatus) => {
@@ -178,4 +228,6 @@ export const providerService = {
   deleteGearItem,
   incomingOrder,
   updateOrderStatus,
+  reStockNeededGearItems,
+  providersAllOrder,
 };

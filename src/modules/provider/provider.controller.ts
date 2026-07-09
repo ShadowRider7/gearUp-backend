@@ -63,9 +63,43 @@ const incomingOrder = catchAsync(
     sendResponse(res, {
       success: true,
       statusCode: HttpStatus.OK,
+      message: "provider's all incoming order fetched successfully",
+      data: {
+        orders,
+      },
+    });
+  },
+);
+
+const providersAllOrders = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = req.user?.id;
+    const orders = await providerService.providersAllOrder(id as string);
+    sendResponse(res, {
+      success: true,
+      statusCode: HttpStatus.OK,
       message: "provider's all order fetched successfully",
       data: {
         orders,
+      },
+    });
+  },
+);
+
+const reStockNeededGearItems = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = req.user?.id;
+
+    const reStockNeededGearItems = await providerService.reStockNeededGearItems(
+      id as string,
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: HttpStatus.OK,
+      message: "gear items that needed restock fetched successfully",
+      data: {
+        reStockNeededGearItems,
       },
     });
   },
@@ -96,4 +130,6 @@ export const providerController = {
   deleteGearItem,
   incomingOrder,
   updateOrderStatus,
+  reStockNeededGearItems,
+  providersAllOrders,
 };

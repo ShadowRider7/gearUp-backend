@@ -21,9 +21,21 @@ router.delete(
 );
 
 router.get(
-  "/orders",
+  "/incomingOrders",
   auth(UserRole.PROVIDER),
   providerController.incomingOrder,
+);
+
+router.get(
+  "/orders",
+  auth(UserRole.PROVIDER),
+  providerController.providersAllOrders,
+);
+
+router.get(
+  "/stock",
+  auth(UserRole.PROVIDER),
+  providerController.reStockNeededGearItems,
 );
 
 router.patch(
