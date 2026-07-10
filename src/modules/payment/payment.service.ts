@@ -1,4 +1,4 @@
-import config from "../../config";
+import config from "../../config/index";
 import { prisma } from "../../lib/prisma";
 import { stripe } from "../../lib/stripe";
 import { RentalStatus } from "../../../generated/prisma/enums";

@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { prisma } from "../../lib/prisma";
 import { ILoginUser } from "./auth.interface";
 import { JwtPayload, SignOptions } from "jsonwebtoken";
-import config from "../../config";
+import config from "../../config/index";
 import { jwtUtils } from "../../utils/jwt";
 
 const loginUser = async (payload: ILoginUser) => {
