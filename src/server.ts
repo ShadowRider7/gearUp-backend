@@ -1,9 +1,11 @@
 import app from "./app";
 import config from "./config/index";
 import { prisma } from "./lib/prisma";
+import configureApp from "@codegenie/serverless-express";
 
 const PORT = config.port;
 
+export const handler = configureApp({ app });
 async function main() {
   try {
     await prisma.$connect();
