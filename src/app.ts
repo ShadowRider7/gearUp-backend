@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello! , world!!");
+  res.send("gearUp backend is running fine ");
 });
 
 app.use("/api/users", userRoutes);
