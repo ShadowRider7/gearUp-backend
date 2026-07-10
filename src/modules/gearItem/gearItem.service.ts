@@ -101,8 +101,12 @@ const gearItemDetails = async (gearItemId: string) => {
           password: true,
         },
       },
-      rentals: true,
-      reviews: true,
+      _count: {
+        select: {
+          rentals: true,
+          reviews: true,
+        },
+      },
     },
   });
   return result;

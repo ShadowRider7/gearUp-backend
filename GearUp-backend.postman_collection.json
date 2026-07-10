@@ -17,7 +17,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"name\" : \"admin pro\",\r\n    \"email\" : \"admin@gmail.com\",\r\n    \"password\" : \"admin123\",\r\n    \"profilePhoto\" : \"www.google.com\",\r\n    \"role\": \"ADMIN\",\r\n    \"bio\":\"Provide bio\",\r\n    \"phone\":\"+8801973824849\",\r\n    \"address\":\"provider location\"\r\n\r\n}",
+              "raw": "{\r\n    \"name\" : \"sadhin pro\",\r\n    \"email\" : \"sadhin@gmail.com\",\r\n    \"password\" : \"admin123\",\r\n    \"profilePhoto\" : \"www.sadhin.com\",\r\n    \"role\": \"CUSTOMER\",\r\n    \"bio\":\"sadhin bio\",\r\n    \"phone\":\"+8801973824849\",\r\n    \"address\":\"sadhin location\"\r\n\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -25,12 +25,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/users/register",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/users/register",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "users",
@@ -47,7 +48,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\" : \"provider1@gmail.com\",\r\n    \"password\": \"admin123\"\r\n}",
+              "raw": "{\r\n    \"email\" : \"sadhin@gmail.com\",\r\n    \"password\": \"admin123\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -55,12 +56,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/auth/login",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/auth/login",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "auth",
@@ -83,12 +85,13 @@
               "raw": "{\r\n    \"name\" : \"Random\",\r\n    \"email\" : \"abc8@gmail.com\",\r\n    \"password\" : \"123456\",\r\n    \"profilePhoto\" : \"www.google.com\"\r\n}"
             },
             "url": {
-              "raw": "http://localhost:5000/api/users/me",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/users/me",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "users",
@@ -113,12 +116,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/users/my-profile",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/users/my-profile",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "users",
@@ -140,7 +144,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\" : \"provider1@gmail.com\",\r\n    \"password\": \"admin123\"\r\n}",
+              "raw": "{\r\n    \"email\" : \"provider@gmail.com\",\r\n    \"password\": \"admin123\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -148,12 +152,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/auth/login",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/auth/login",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "auth",
@@ -178,12 +183,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/provider/gear",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/provider/gear",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "provider",
@@ -206,12 +212,13 @@
               "raw": "  {\r\n    \"name\": \"Adventure Gear\",\r\n    \"description\": \"Survival kits, compasses, multi-tools, headlamps, and outdoor adventure accessories.\"\r\n  }"
             },
             "url": {
-              "raw": "http://localhost:5000/api/category",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/category",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "category"
@@ -235,12 +242,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/provider/gear/2e02f9c0-b9f1-4f64-8b4a-0de6a2e4d2d0",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/provider/gear/2e02f9c0-b9f1-4f64-8b4a-0de6a2e4d2d0",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "provider",
@@ -257,12 +265,13 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "http://localhost:5000/api/provider/gear/26643f1a-c669-4dd8-bdbc-e1e7d7ff7651",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/provider/gear/26643f1a-c669-4dd8-bdbc-e1e7d7ff7651",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "provider",
@@ -291,12 +300,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/provider/orders",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/provider/orders",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "provider",
@@ -319,12 +329,13 @@
               "raw": ""
             },
             "url": {
-              "raw": "http://localhost:5000/api/provider/incomingOrders",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/provider/incomingOrders",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "provider",
@@ -341,7 +352,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"status\":\"PICKED_UP\"\r\n}",
+              "raw": "{\r\n    \"status\":\"CONFIRMED\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -349,17 +360,18 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/provider/orders/86b31c14-6a89-4f67-9da1-d998f2a45348",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/provider/orders/0cf827ed-12a2-4b55-8c08-f0bf3ebd0929",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "provider",
                 "orders",
-                "86b31c14-6a89-4f67-9da1-d998f2a45348"
+                "0cf827ed-12a2-4b55-8c08-f0bf3ebd0929"
               ]
             }
           },
@@ -385,12 +397,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/auth/login",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/auth/login",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "auth",
@@ -415,12 +428,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/category/create",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/category/create",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "category",
@@ -443,12 +457,13 @@
               "raw": ""
             },
             "url": {
-              "raw": "http://localhost:5000/api/admin/users",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/admin/users",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "admin",
@@ -473,12 +488,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/admin/users/83ee1b0c-1630-40f0-b4a1-ad2ef43b27a7",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/admin/users/83ee1b0c-1630-40f0-b4a1-ad2ef43b27a7",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "admin",
@@ -502,12 +518,13 @@
               "raw": ""
             },
             "url": {
-              "raw": "http://localhost:5000/api/admin/gear",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/admin/gear",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "admin",
@@ -530,12 +547,13 @@
               "raw": ""
             },
             "url": {
-              "raw": "http://localhost:5000/api/admin/rentals",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/admin/rentals",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "admin",
@@ -560,12 +578,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/category/91abe44e-e9fa-4a19-b1e7-21045dfa38c7",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/category/91abe44e-e9fa-4a19-b1e7-21045dfa38c7",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "category",
@@ -587,7 +606,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\" : \"customer1@gmail.com\",\r\n    \"password\": \"admin123\"\r\n}",
+              "raw": "{\r\n    \"email\" : \"sadhin@gmail.com\",\r\n    \"password\": \"admin123\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -595,12 +614,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/auth/login",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/auth/login",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "auth",
@@ -617,7 +637,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"gearItemId\": \"b52068ac-dde6-4546-ae8d-553d532acd69\",\r\n \"startDate\": \"2026-09-10\",\r\n  \"endDate\": \"2026-09-20\",\r\n  \"quantity\": 4\r\n}",
+              "raw": "{\r\n  \"gearItemId\": \"8f67c7a0-148b-4c64-a755-0b4cb42e140c\",\r\n \"startDate\": \"2026-09-10\",\r\n  \"endDate\": \"2026-09-20\",\r\n  \"quantity\": 4\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -625,12 +645,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/rentals",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/rentals",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "rentals"
@@ -652,12 +673,13 @@
               "raw": ""
             },
             "url": {
-              "raw": "http://localhost:5000/api/rentals",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/rentals",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "rentals"
@@ -679,12 +701,13 @@
               "raw": "{\r\n  \"gearItemId\": \"a931d30c-1b00-4292-87f0-897cb687acb5\",\r\n \"startDate\": \"2026-07-13\",\r\n  \"endDate\": \"2026-07-20\",\r\n  \"quantity\": 2\r\n}"
             },
             "url": {
-              "raw": "http://localhost:5000/api/rentals/86b31c14-6a89-4f67-9da1-d998f2a45348",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/rentals/86b31c14-6a89-4f67-9da1-d998f2a45348",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "rentals",
@@ -701,7 +724,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"rentalOrderId\": \"86b31c14-6a89-4f67-9da1-d998f2a45348\"\r\n\r\n}",
+              "raw": "{\r\n  \"rentalOrderId\": \"0cf827ed-12a2-4b55-8c08-f0bf3ebd0929\"\r\n\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -709,12 +732,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/payments/create",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/payments/create",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "payments",
@@ -730,12 +754,13 @@
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "http://localhost:5000/api/rentals/return/86b31c14-6a89-4f67-9da1-d998f2a45348",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/rentals/return/86b31c14-6a89-4f67-9da1-d998f2a45348",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "rentals",
@@ -752,12 +777,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:5000/api/payments",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/payments",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "payments"
@@ -786,12 +812,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/reviews",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/reviews",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "reviews"
@@ -805,27 +832,6 @@
     {
       "name": "public",
       "item": [
-        {
-          "name": "get gear item details by id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:5000/api/gear/5f35b602-9d7d-4d5d-9a26-a82cade28fd0",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "5000",
-              "path": [
-                "api",
-                "gear",
-                "5f35b602-9d7d-4d5d-9a26-a82cade28fd0"
-              ]
-            }
-          },
-          "response": []
-        },
         {
           "name": "get all gearItem",
           "protocolProfileBehavior": {
@@ -844,17 +850,33 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000/api/gear?sortBy=pricePerDay&sortOrder=asc&stock=10",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/gear",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "gear"
               ],
               "query": [
+                {
+                  "key": "sortBy",
+                  "value": "pricePerDay",
+                  "disabled": true
+                },
+                {
+                  "key": "sortOrder",
+                  "value": "asc",
+                  "disabled": true
+                },
+                {
+                  "key": "stock",
+                  "value": "10",
+                  "disabled": true
+                },
                 {
                   "key": "categoryId",
                   "value": "afb58fc4-065e-466a-b59f-f7b3d309b1c5",
@@ -869,19 +891,36 @@
                   "key": "limit",
                   "value": "5",
                   "disabled": true
-                },
-                {
-                  "key": "sortBy",
-                  "value": "pricePerDay"
-                },
-                {
-                  "key": "sortOrder",
-                  "value": "asc"
-                },
-                {
-                  "key": "stock",
-                  "value": "10"
                 }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get gear item details by id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"name\": \"Adventure Gear\",\r\n    \"description\": \"Survival kits, compasses, multi-tools, headlamps, and outdoor adventure accessories.\"\r\n  }"
+            },
+            "url": {
+              "raw": "https://gear-up-backend-theta.vercel.app/api/gear/c8cb5900-400d-4294-a981-a9ed2c27abf3",
+              "protocol": "https",
+              "host": [
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "gear",
+                "c8cb5900-400d-4294-a981-a9ed2c27abf3"
               ]
             }
           },
@@ -900,12 +939,13 @@
               "raw": "  {\r\n    \"name\": \"Adventure Gear\",\r\n    \"description\": \"Survival kits, compasses, multi-tools, headlamps, and outdoor adventure accessories.\"\r\n  }"
             },
             "url": {
-              "raw": "http://localhost:5000/api/category",
-              "protocol": "http",
+              "raw": "https://gear-up-backend-theta.vercel.app/api/category",
+              "protocol": "https",
               "host": [
-                "localhost"
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
               ],
-              "port": "5000",
               "path": [
                 "api",
                 "category"
