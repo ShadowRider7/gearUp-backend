@@ -376,6 +376,35 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "low stock items",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"name\": \"camping update\",\r\n    \"description\": \"Tents, sleeping bags, camping stoves, lanterns, and outdoor camping gear.update\"\r\n  }"
+            },
+            "url": {
+              "raw": "https://gear-up-backend-theta.vercel.app/api/provider/stock",
+              "protocol": "https",
+              "host": [
+                "gear-up-backend-theta",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "provider",
+                "stock"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
