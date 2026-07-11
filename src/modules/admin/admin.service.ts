@@ -3,9 +3,11 @@ import { prisma } from "../../lib/prisma";
 
 const getAllUsersFromDB = async () => {
   const allUsers = await prisma.user.findMany({
-    where: {
-      role: UserRole.CUSTOMER || UserRole.PROVIDER,
+     where: {
+    role: {
+      in: [UserRole.CUSTOMER, UserRole.PROVIDER],
     },
+  },
     include: {
       profile: true,
       rentals: true,
